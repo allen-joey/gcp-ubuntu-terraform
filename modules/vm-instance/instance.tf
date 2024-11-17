@@ -17,8 +17,8 @@ resource "tls_private_key" "ssh" {
 resource "google_compute_instance" "europa" {
   project = var.project_id
 
-  name         = var.name
-  machine_type = "e2-micro"
+  name         = var.instance-name
+  machine_type = var.instance-size
   zone         = "${local.region}-c"
 
   tags = ["europa", "http-server", "https-server"]
@@ -27,7 +27,7 @@ resource "google_compute_instance" "europa" {
     auto_delete = true
 
     initialize_params {
-      image = data.google_compute_image.europa.self_link
+      image = "data.google_compute_image.${var.instance-name}.self_link"
 
       labels = {
         managed_by = "terraform"
@@ -56,7 +56,6 @@ EOT
 
 }
 
-# Terraform create the ssh keys
 resource "local_file" "local_ssh_key_pem" {
   content         = tls_private_key.ssh.private_key_pem
   filename        = ".ssh/ssh_key"
@@ -75,5 +74,5 @@ output "instance_ssh_key" {
 }
 
 output "instance_ip" {
-  value = google_compute_instance.europa.network_interface.0.access_config.0.nat_ip
+  value = "google_compute_instance.${var.instance-name}.network_interface.0.access_config.0.nat_ip"
 }
