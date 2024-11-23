@@ -37,7 +37,6 @@ resource "google_compute_instance" "europa" {
     }
   }
 
-
   metadata = {
     sshKeys = "ubuntu:${tls_private_key.ssh.public_key_openssh}"
   }
