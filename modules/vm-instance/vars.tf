@@ -3,6 +3,12 @@ variable "instance-name" {
   default     = "europa"
 }
 
+variable "image" {
+  description = "Name of the image"
+  default     = "ubuntu-2204-lts"
+}
+
+
 variable "instance-size" {
   description = "Instance size"
   default     = "e2-micro"

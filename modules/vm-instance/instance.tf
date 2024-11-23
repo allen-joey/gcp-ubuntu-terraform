@@ -1,9 +1,5 @@
 # GCP VM - Ubuntu 22.04
 
-data "google_compute_image" "europa" {
-  family  = "ubuntu-2204-lts"
-  project = "ubuntu-os-cloud"
-}
 
 locals {
   region            = "europe-west2"
@@ -27,7 +23,7 @@ resource "google_compute_instance" "europa" {
     auto_delete = true
 
     initialize_params {
-      image = "data.google_compute_image.${var.instance-name}.self_link"
+      image = var.image
 
       labels = {
         managed_by = "terraform"
