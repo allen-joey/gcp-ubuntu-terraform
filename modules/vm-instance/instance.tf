@@ -63,11 +63,7 @@ resource "local_file" "local_ssh_key_pub" {
   file_permission = "0600"
 }
 
-output "instance_ssh_key" {
-  value      = ".ssh/ssh_key"
-  depends_on = [tls_private_key.ssh]
-}
-
-output "instance_ip" {
-  value = "google_compute_instance.${var.instance-name}.network_interface.0.access_config.0.nat_ip"
+# Output variable: Public IP address
+output "public_ip" {
+  value = "google_compute_instance.${var.instance-name}.network_interface.0.access_config.0.assigned_nat_ip"
 }

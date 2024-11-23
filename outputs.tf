@@ -1,3 +1,3 @@
-output "ip_ssh_key" {
-  value = values(module.vm-instance)[*]
+output "public_ip" {
+  value = module.vm-instance.public_ip
 }
