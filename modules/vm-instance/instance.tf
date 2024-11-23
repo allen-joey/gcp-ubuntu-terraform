@@ -1,6 +1,5 @@
 # GCP VM - Ubuntu 22.04
 
-
 locals {
   region            = "europe-west2"
   availability_zone = "europe-west2-c"
